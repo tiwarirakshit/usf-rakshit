@@ -1,0 +1,150 @@
+<!--Breadcrumb start-->
+<div class="ed_pagetitle">
+	<div class="ed_img_overlay"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-4 col-sm-6">
+				<div class="page_title wow fadeInUp" data-wow-delay="300ms" data-wow-duration="2000ms">
+					<h2>contact Us</h2>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-8 col-sm-6">
+				<ul class="breadcrumb wow fadeInUp" data-wow-delay="300ms" data-wow-duration="2000ms">
+					<li><a href="/">home</a></li>
+					<li><i class="fa fa-angle-double-left" aria-hidden="true"></i></li>
+					<li><a href="/contact">contact us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Breadcrumb end-->
+<!--Section fifteen Contact form start-->
+<div class="ed_event_single_contact_address ed_toppadder80 ed_bottompadder80">
+	<div class="container">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="ed_heading_top ed_bottompadder50 wow fadeInUp" data-wow-delay="300ms" data-wow-duration="2000ms">
+				<h3><span>Contact</span> & Find</h3>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6">
+			<div class="row">
+				<div class="ed_event_single_address_info ed_toppadder50 ed_bottompadder50 wow fadeInUp" data-wow-delay="300ms"
+					data-wow-duration="2000ms">
+					<h4 class="ed_bottompadder20">contact info</h4>
+					<p class="ed_bottompadder40 ed_toppadder10">You can always reach us via following contact details. We will
+						give our best to reach you as possible.</p>
+					<p><a href="tel:+91-810982889"><i class="fa fa-phone" aria-hidden="true"></i> +91-810982889</a></p>
+					<p><a href="mailto:"><i class="fa fa-envelope-o" aria-hidden="true"></i> uniquestepfinancial@gmail.com</a>
+					</p>
+					<p>Website: <a href="#">www.uniquestepfinancial.com</a></p>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-3">
+
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-3">
+			<div class="row">
+				<div class="ed_event_single_address_map wow fadeInUp" data-wow-delay="300ms" data-wow-duration="2000ms">
+					<div id="map">
+						<img src="/images/paytm.jpg" alt="Paytm">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Section fifteen Contact form start-->
+<!--Section fourteen Contact form start-->
+<div class="ed_graysection ed_toppadder80 ed_bottompadder80">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="ed_heading_top ed_bottompadder50 wow fadeInUp" data-wow-delay="300ms" data-wow-duration="2000ms">
+					<h3><span>Send us</span> a message</h3>
+				</div>
+			</div>
+			<div class="ed_contact_form wow fadeInUp" data-wow-delay="300ms" data-wow-duration="2000ms">
+				<form>
+					<div class="col-lg-6 col-md-6 col-sm-12">
+						<div class="form-group">
+							<input type="text" id="name" class="form-control require" name="first_name" placeholder="Your Name">
+						</div>
+						<div class="form-group">
+							<input type="email" id="email" class="form-control require" placeholder="Your Email" name="email"
+								data-valid="email" data-error="Email should be valid.">
+						</div>
+						<div class="form-group">
+							<input type="text" id="subject" class="form-control require" name="subject" placeholder="Subject">
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-12">
+						<div class="form-group">
+							<textarea class="form-control require" id="message" name="message" rows="7"
+								placeholder="Message"></textarea>
+						</div>
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="response"></div>
+						</div>
+						<button type="submit" onclick="submitHandler3(event)" class="btn ed_btn ed_orange pull-right submitForm"
+							form-type="contact">send</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Section fourteen Contact form start-->
+
+<script>
+
+	const submitHandler3 = async (event) => {
+		try {
+			event.preventDefault();
+
+			const name = document.getElementById('name').value;
+			const email = document.getElementById('email').value;
+			const subject = document.getElementById('subject').value;
+			const message = document.getElementById('message').value;
+
+			if (!!name == false && !!email === false && !!subject == false && !!message == false) {
+				Swal.fire({ title: "please fill proper data", icon: "error" });
+				return false;
+			}
+			else {
+
+				const response = await axios({
+					method: 'post',
+					url: '/contactPostRequest',
+					data: {
+						name: name,
+						email: email,
+						subject: subject,
+						message: message
+					}
+				});
+
+				if (response?.data?.status === "SUCCESS") {
+
+					Swal.fire({ title: response?.data?.message, icon: "success" });
+
+					document.getElementById('name').value = "";
+					document.getElementById('email').value = "";
+					document.getElementById('subject').value = "";
+					document.getElementById('message').value = "";
+					return;
+
+				} else {
+					Swal.fire({ title: response?.data?.message, icon: "error" });
+				}
+			}
+		}
+		catch (e) {
+			Swal.fire({ title: e?.message, icon: "error", });
+			return;
+		}
+	}
+
+
+</script>

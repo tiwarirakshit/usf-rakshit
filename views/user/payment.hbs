@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unique Step Financial | {{title}}</title>
+  <!-- Bootstrap 5 CDN Link -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Google Poppins Font CDN Link */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Variables */
+    :root {
+      --primary-font-family: 'Poppins', sans-serif;
+      --light-white: #f5f8fa;
+      --gray: #5e6278;
+      --gray-1: #e3e3e3;
+    }
+
+    body {
+      font-family: var(--primary-font-family);
+      font-size: 14px;
+    }
+
+    /* Main CSS */
+    .wrapper {
+      padding: 0 0 100px;
+      /* background-image: url("images/bg.png"); */
+      background-position: bottom center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-attachment: fixed;
+      min-height: 100%;
+    }
+
+    .wrapper .logo img {
+      max-width: 40%;
+      height: auto;
+    }
+
+    .wrapper input {
+      background-color: var(--light-white);
+      border-color: var(--light-white);
+      color: var(--gray);
+    }
+
+    .wrapper input:focus {
+      box-shadow: none;
+    }
+
+    .wrapper .password-info {
+      font-size: 10px;
+    }
+
+    .wrapper .submit_btn {
+      padding: 10px 15px;
+      font-weight: 500;
+    }
+
+    .wrapper .login_with {
+      padding: 8px 15px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: 0.3s ease-in-out;
+    }
+
+    .wrapper .submit_btn:focus,
+    .wrapper .login_with:focus {
+      box-shadow: none;
+    }
+
+    .wrapper .login_with:hover {
+      background-color: var(--gray-1);
+      border-color: var(--gray-1);
+    }
+
+    .wrapper .login_with img {
+      max-width: 7%;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.min.css"
+    integrity="sha512-cyIcYOviYhF0bHIhzXWJQ/7xnaBuIIOecYoPZBgJHQKFPo+TOBA+BY1EnTpmM8yKDU4ZdI3UGccNGCEUdfbBqw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js"
+    integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.js"
+    integrity="sha512-uplugzeh2/XrRr7RgSloGLHjFV0b4FqUtbT5t9Sa/XcilDr1M3+88u/c+mw6+HepH7M2C5EVmahySsyilVHI/A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- end theme style -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.js"
+    integrity="sha512-uplugzeh2/XrRr7RgSloGLHjFV0b4FqUtbT5t9Sa/XcilDr1M3+88u/c+mw6+HepH7M2C5EVmahySsyilVHI/A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+
+<body>
+  <section class="wrapper mt-5">
+    <div class="container">
+      <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 text-center">
+        <div class="logo">
+          <img src="/images/header/Logo.jpg" class="img-fluid" alt="logo">
+        </div>
+        <form class="rounded bg-white shadow p-5"
+          action="/paymentPostRequest/{{data.course}}/{{data.price}}/{{data.valid}}" method="post">
+          <h3 class="text-dark fw-bolder fs-4 mb-2">Your {{data.course}} Course</h3>
+          <div class="fw-normal text-muted mb-2">
+            Course Details
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" value="{{data.valid}}" disabled id="floatingValid">
+            <label for="floatingValid">Valid For </label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" value="{{data.price}}" disabled id="floatingPrice">
+            <label for="floatingPrice">Price</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="name" id="floatingFirstName" placeholder="Ram">
+            <label for="floatingFirstName">Name </label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" name="email" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Email address</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="tel" class="form-control" name="phone" id="floatingPhone" placeholder="+91-1234567890">
+            <label for="floatingPhone">Phone number</label>
+          </div>
+          <div class="form-check d-flex align-items-center">
+            <input class="form-check-input" type="checkbox" id="gridCheck" checked>
+            <label class="form-check-label ms-2" for="gridCheck">
+              I Agree <a href="#">Terms and conditions</a>.
+            </label>
+          </div>
+          <button type="submit" class=" btn btn-primary submit_btn w-100
+            my-4">Continue</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</body>
+{{#if status}}
+<script>
+  Swal.fire({ title: "{{message}}", icon: "error" });
+</script>
+{{/if}}
+
+</html>
